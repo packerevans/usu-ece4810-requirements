@@ -92,18 +92,12 @@ The following sections describe the requirements of the interface, functional, a
 \subsubsection{Physical}
 
 \paragraph{}
-The probe shall have maximum dimensions of 5~cm $\times$ 5~cm $\times$ 5~cm.
+The probe shall connect to the handheld controller by a boom between 30~cm and 60~cm long.  The probe shall attach to the boom with a detachable connector.
 
 \paragraph{}
-The boom shall be between 30~cm and 60~cm long.  The probe shall attach to the boom with a detachable connector.
-
-\paragraph{}
-The handheld controller shall have maximum dimensions of 18~cm $\times$ 10~cm $\times$ 5~cm.  The total weight of the assembled system (probe, boom, and controller) shall not exceed 1.5~kg.
+The total weight of the assembled system (probe, boom, and controller) shall not exceed 1.5~kg.
 
 \subsubsection{Functional}
-
-\paragraph{}
-The controller shall have a physical steering control (knob, roller, or joystick) for adjusting directional focus, and an LCD display with at least 320~$\times$~240 resolution.
 
 \paragraph{}
 The system shall have a data port (USB or similar) for exporting data to a PC.
@@ -118,6 +112,18 @@ The system shall use three microphones arranged in a triangular array, capturing
 \paragraph{}
 Each mic channel shall have a signal-to-noise ratio of at least 60~dB.
 
+\paragraph{}
+The microphone spacing shall be fixed and rigid so calibration stays accurate.  During prototyping, the mic array shall support adjustable spacing so different configurations can be tested.
+
+\paragraph{}
+The mic array shall be housed in the probe.  The probe shall have maximum dimensions of 5~cm $\times$ 5~cm $\times$ 5~cm.
+
+\paragraph{}
+The probe shall be at least IP54 rated (dust protected, splash resistant) and shall operate from 0$^{\circ}$C to 45$^{\circ}$C.
+
+\paragraph{}
+The probe shall survive a 1.2~m drop onto concrete without breaking.
+
 \subsubsection{Signal Conditioning Module}
 
 \paragraph{}
@@ -125,6 +131,12 @@ The signal conditioning module shall amplify each mic output to a level that wor
 
 \paragraph{}
 The ADC shall sample all three channels simultaneously at a minimum of 44.1~kHz with at least 16-bit resolution.
+
+\paragraph{}
+The signal conditioning circuitry shall be housed in the probe or at the probe end of the boom to keep the analog signal path short.
+
+\paragraph{}
+The signal conditioning electronics shall be enclosed with no exposed conductors during normal use.
 
 \subsubsection{Processing Module}
 
@@ -137,15 +149,27 @@ The processing module shall do beamforming so the user can focus on one directio
 \paragraph{}
 The system shall generate a 2D time-by-frequency spectrogram from the beamformed output, updating at least 10 times per second.
 
+\paragraph{}
+The processing module shall support swappable DSP pipelines so other algorithms can be tried without changing hardware.
+
+\paragraph{}
+The processing module shall be housed in the handheld controller.  The controller shall have maximum dimensions of 18~cm $\times$ 10~cm $\times$ 5~cm.
+
+\paragraph{}
+The controller shall have a physical steering control (knob, roller, or joystick) for adjusting directional focus.
+
 \subsubsection{Storage Module}
 
 \paragraph{}
-The system shall store captured audio and directional data on at least 1~GB of onboard non-volatile memory.
+The system shall store captured audio and directional data on at least 1~GB of onboard non-volatile memory in the handheld controller.
 
 \paragraph{} \label{export}
-The system shall export raw audio as WAV files and directional data as CSV files.
+The system shall export raw audio as WAV files and directional data as CSV files through the data port.
 
 \subsubsection{Display Module}
+
+\paragraph{}
+The display shall be an LCD with at least 320~$\times$~240 resolution on the handheld controller.
 
 \paragraph{}
 The display shall show the spectrogram with a directional indicator and a 3D arrow or similar visual pointing toward the dominant sound source.
@@ -155,13 +179,16 @@ Latency from steering input to display update shall be no more than 100~ms.
 
 \subsection{Non-Functional Requirements}
 
-\subsubsection{Electrical}
+\subsubsection{Power}
 
 \paragraph{} \label{battery}
-The system shall run on a rechargeable battery that lasts at least 2 hours of continuous use.
+The system shall run on a rechargeable battery in the handheld controller that lasts at least 2 hours of continuous use.
 
 \paragraph{}
-The system shall have a USB-C charging port.
+The system shall have a USB-C charging port on the handheld controller.
+
+\paragraph{}
+The battery shall have over-current and over-temperature protection.
 
 \subsubsection{Physical}
 
@@ -170,6 +197,9 @@ All electronics shall be enclosed in a protective case.  The system shall surviv
 
 \paragraph{}
 The boom shall handle at least 20~N of lateral force without bending permanently.
+
+\paragraph{}
+The system shall not have exposed conductors during normal use.
 
 \subsubsection{Environmental}
 
@@ -182,14 +212,4 @@ The system shall be at least IP54 rated (dust protected, splash resistant).
 \subsubsection{Economic}
 
 \paragraph{} \label{cost}
-The prototype shall cost no more than \$500 in components.
-
-\subsection{Other Requirements}
-
-\subsubsection{Safety}
-
-\paragraph{}
-The system shall not have exposed conductors during normal use.  The system shall not produce sound louder than 85~dBA at the user's ear.
-
-\paragraph{}
-The battery shall have over-current and over-temperature protection.
+The prototype shall cost no more than \$500 in components.  The system shall use standard off-the-shelf components.
