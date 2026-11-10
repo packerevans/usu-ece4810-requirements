@@ -1,2 +1,195 @@
 \section{ENGINEERING REQUIREMENTS}
 
+\subsection{Item Description}
+
+The Tri-Mic takes in sound through a triangular mic array, processes it using the MUSIC algorithm, and outputs the direction and frequency content of the sound to the user on a built-in display.  The system has two physical parts connected by a boom: a probe and a handheld controller.
+
+The probe holds the three microphones and sits at the end of the boom so it can reach into tight spots.  The handheld controller has the display, steering controls, processor, and storage.  The user holds the controller and positions the probe where they need to listen.
+
+To do this, the system has five stages: a sound capture module, a signal conditioning module, a processing module, a storage module, and a display module (refer to Figure~\ref{fig:functional}).
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw, thick, text width=2.4cm, text centered,
+                  minimum height=1.1cm, font=\small},
+    io/.style={font=\small, align=center},
+    arr/.style={-{Stealth[length=2.5mm]}, thick},
+    lbl/.style={font=\scriptsize, fill=white, inner sep=1pt}
+]
+
+\node[block] (cap) at (0,0) {Sound Capture\\Module};
+\node[block] (cond) at (4.3,0) {Signal\\Conditioning\\Module};
+\node[block] (proc) at (8.6,0) {Processing\\Module};
+\node[block] (stor) at (7.1,-2.5) {Storage\\Module};
+\node[block] (disp) at (10.1,-2.5) {Display\\Module};
+
+\node[io] (sound) at (-2.2,0) {Sound};
+\node[io] (steer) at (8.6,1.8) {Steering\\Control};
+\node[io] (export) at (7.1,-4) {Data Export};
+
+\draw[arr] (sound) -- (cap);
+\draw[arr] (cap) -- node[lbl] {Analog} (cond);
+\draw[arr] (cond) -- node[lbl] {Digital} (proc);
+
+\coordinate (fork) at ([yshift=-0.7cm]proc.south);
+\draw[thick] (proc.south) -- (fork);
+\draw[arr] (fork) -| (stor.north);
+\draw[arr] (fork) -| (disp.north);
+
+\draw[arr] (steer) -- (proc);
+\draw[arr] (stor) -- (export);
+
+\draw[dashed, thick, rounded corners=5pt]
+    (-1.5, 2.3) rectangle (11.7, -3.4);
+
+\end{tikzpicture}
+\caption{Modularized Functional Diagram}
+\label{fig:functional}
+\end{figure}
+
+The non-functional parts of the system consist of a power component, physical requirements, and environmental factors (refer to Figure~\ref{fig:support}).
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw, thick, text width=4cm, font=\small,
+                  inner sep=6pt, align=left},
+    arr/.style={-{Stealth[length=2.5mm]}, thick}
+]
+
+\node[block] (power) at (0,0) {\textbf{Power}\\
+Rechargeable battery\\
+2-hour runtime\\
+USB-C charging};
+
+\node[block] (phys) at (6,0) {\textbf{Physical}\\
+Enclosed electronics\\
+1.2~m drop survival\\
+Boom: 20~N lateral};
+
+\node[block] (sys) at (3,-3.2) {\textbf{System}\\
+Under \$500 prototype\\
+IP54 rated};
+
+\node[block] (env) at (3,-5.8) {\textbf{Environment}\\
+0--45$^{\circ}$C operation\\
+Dust/splash resistant};
+
+\draw[arr] (power.south) -- ([xshift=-0.5cm]sys.north);
+\draw[arr] (phys.south) -- ([xshift=0.5cm]sys.north);
+\draw[arr] (sys) -- (env);
+
+\end{tikzpicture}
+\caption{System Functional Support Diagram}
+\label{fig:support}
+\end{figure}
+
+The following sections describe the requirements of the interface, functional, and non-functional components of the Tri-Mic.
+
+\subsection{Interface Requirements}
+
+\subsubsection{Physical}
+
+\paragraph{}
+The probe shall have maximum dimensions of 5~cm $\times$ 5~cm $\times$ 5~cm.
+
+\paragraph{}
+The boom shall be between 30~cm and 60~cm long.  The probe shall attach to the boom with a detachable connector.
+
+\paragraph{}
+The handheld controller shall have maximum dimensions of 18~cm $\times$ 10~cm $\times$ 5~cm.  The total weight of the assembled system (probe, boom, and controller) shall not exceed 1.5~kg.
+
+\subsubsection{Functional}
+
+\paragraph{}
+The controller shall have a physical steering control (knob, roller, or joystick) for adjusting directional focus, and an LCD display with at least 320~$\times$~240 resolution.
+
+\paragraph{}
+The system shall have a data port (USB or similar) for exporting data to a PC.
+
+\subsection{Functional Requirements}
+
+\subsubsection{Sound Capture Module}
+
+\paragraph{}
+The system shall use three microphones arranged in a triangular array, capturing frequencies from 20~Hz to 20~kHz.
+
+\paragraph{}
+Each mic channel shall have a signal-to-noise ratio of at least 60~dB.
+
+\subsubsection{Signal Conditioning Module}
+
+\paragraph{}
+The signal conditioning module shall amplify each mic output to a level that works with the ADC input range.
+
+\paragraph{}
+The ADC shall sample all three channels simultaneously at a minimum of 44.1~kHz with at least 16-bit resolution.
+
+\subsubsection{Processing Module}
+
+\paragraph{} \label{musicReq}
+The processing module shall run the MUSIC algorithm for direction-of-arrival estimation.  The system shall determine azimuth and elevation of a sound source within $\pm 5^{\circ}$ at distances of 1~m or more.
+
+\paragraph{} \label{beamform}
+The processing module shall do beamforming so the user can focus on one direction and reject sound from other directions.  The system shall isolate a target sound source with at least 15~dB of directional rejection.
+
+\paragraph{}
+The system shall generate a 2D time-by-frequency spectrogram from the beamformed output, updating at least 10 times per second.
+
+\subsubsection{Storage Module}
+
+\paragraph{}
+The system shall store captured audio and directional data on at least 1~GB of onboard non-volatile memory.
+
+\paragraph{} \label{export}
+The system shall export raw audio as WAV files and directional data as CSV files.
+
+\subsubsection{Display Module}
+
+\paragraph{}
+The display shall show the spectrogram with a directional indicator and a 3D arrow or similar visual pointing toward the dominant sound source.
+
+\paragraph{}
+Latency from steering input to display update shall be no more than 100~ms.
+
+\subsection{Non-Functional Requirements}
+
+\subsubsection{Electrical}
+
+\paragraph{} \label{battery}
+The system shall run on a rechargeable battery that lasts at least 2 hours of continuous use.
+
+\paragraph{}
+The system shall have a USB-C charging port.
+
+\subsubsection{Physical}
+
+\paragraph{} \label{drop}
+All electronics shall be enclosed in a protective case.  The system shall survive a 1.2~m drop onto concrete without breaking.
+
+\paragraph{}
+The boom shall handle at least 20~N of lateral force without bending permanently.
+
+\subsubsection{Environmental}
+
+\paragraph{} \label{temp}
+The system shall operate from 0$^{\circ}$C to 45$^{\circ}$C.
+
+\paragraph{} \label{ip}
+The system shall be at least IP54 rated (dust protected, splash resistant).
+
+\subsubsection{Economic}
+
+\paragraph{} \label{cost}
+The prototype shall cost no more than \$500 in components.
+
+\subsection{Other Requirements}
+
+\subsubsection{Safety}
+
+\paragraph{}
+The system shall not have exposed conductors during normal use.  The system shall not produce sound louder than 85~dBA at the user's ear.
+
+\paragraph{}
+The battery shall have over-current and over-temperature protection.

@@ -3,6 +3,9 @@
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
 
 
 \setlength{\parindent}{0cm}
@@ -28,12 +31,12 @@
 \makeatletter
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {0.0001pt \@plus .2ex}%
-                                     {\normalfont\normalsize\bfseries}}
+                                     {-1em}%
+                                     {\normalfont\normalsize}}
 \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {0.0001pt \@plus .2ex}%
-                                     {\normalfont\normalsize\bfseries}}
+                                     {-1em}%
+                                     {\normalfont\normalsize}}
 \makeatother
 
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}

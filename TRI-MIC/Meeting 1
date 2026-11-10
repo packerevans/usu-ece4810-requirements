@@ -1,0 +1,21 @@
+Meeting to do:
+(a) Caleb Stimpson is the team leader we will alternate team leaders thought meetings.
+(b) Our Team project is a 3D mic. 
+Tri-mic
+A microphone that can record and do direction finding in 3D dimensions. 
+allowing for data review and  analyses during and after capture.
+The overall use of this device would be for pinpointing problems using sound or later export for audio analysis
+Meetings notes on what a user would want.
+Needs for UI:
+- 2D time x frequency spectrogram of broadband audio capture, not necessarily live
+  - open questions: does user need to navigate spectrogram? should spectrogram be its own tool on an external system or embedded with mic?
+- way to move around the directional focus, changes will be reflected in the spectrogram by beamforming, so the intensities will fluctuate and can be isolated in direction
+ - should it be a mechanical control? a mechanical control is more fun to make, more fun to use, and is easier to understand than a control based off of mouse-and-keyboard. However, a digital control can have save states and be restored
+Needs for data:
+- direction
+- distance? TDOA
+Needs for users:
+- understanding where the mic was set up relative to the things they are interested in
+- used by technicians in the field, they don't want to move to a different workstation to think on the data, and then come back to collect more data. Ideally they can view the whole data where they are
+Value for users:
+- mic can fit in more places than your head, and can be put in places that you don't want to put your head in: mic and boom need to be ruggedized

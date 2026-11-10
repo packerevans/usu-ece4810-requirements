@@ -1,77 +1,188 @@
 \section{VERIFICATION OF REQUIREMENTS}
 
-	Possible verification methods include:
-	\bigskip
-	
-	\begin{enumerate}
-		\item Inspection:\\
+Possible verification methods include:
+\bigskip
 
-	Inspection is a method of verification consisting of investigation, 
-	without the use of special laboratory appliances or procedures, to 
-	determine compliance with requirements. Inspection is generally 
-	nondestructive and includes (but is not limited to) visual examination, 
-	manipulation, gauging, and measurement.
+\begin{enumerate}
+	\item Inspection:\\
+	Visual examination, measurement, or gauging without special lab equipment.
 
-		\item Demonstration:\\
+	\item Demonstration:\\
+	Showing that the system works by operating it.  No special instrumentation needed.
 
-	Demonstration is a method of verification that is limited to readily 
-	observable functional operation to determine compliance with 
-	requirements. This method shall not require the use of special equipment 
-	or sophisticated instrumentation.
-	
-		\item Analysis:\\
+	\item Analysis:\\
+	Review of documentation, calculations, or accumulated test data.
 
-	Analysis is a method of verification, taking the form of the processing of 
-	accumulated results and conclusions, intended to provide proof that 
-	verification of a requirement has been accomplished. The analytical 
-	results may be based on engineering study, compilation or interpretation 
-	of existing information, similarity to previously verified requirements, 
-	or derived from lower level examinations, tests, demonstrations, or 
-	analyses.
+	\item Direct Test:\\
+	Using special equipment or instrumentation to measure specific performance characteristics.
+\end{enumerate}
 
+\subsection{Interface Requirements}
 
-		\item Direct Test:
+\subsubsection{Physical}
 
-	Test is a method of verification that employs technical means, including (but not 
-	limited to) the evaluation of functional characteristics by use of special equipment
-	or instrumentation, simulation techniques, and the application of established 
-	principles and procedures to determine compliance with requirements.
-			
-	\end{enumerate}		
-	
-\subsection{Verify Coverage of Stakeholder Requirements}
+\paragraph{}
+Measure the probe with calipers.  Verify it fits within 5~cm $\times$ 5~cm $\times$ 5~cm.
 
+\paragraph{}
+Measure the boom length.  Verify it's between 30~cm and 60~cm.  Disconnect and reconnect the probe 10 times.  Verify the connection holds and the system still works.
 
+\paragraph{}
+Measure the handheld controller.  Verify it fits within 18~cm $\times$ 10~cm $\times$ 5~cm.  Weigh the full system on a scale.  Verify total is 1.5~kg or less.
 
+\subsubsection{Functional}
 
+\paragraph{}
+Turn the steering control.  Verify the beamforming direction changes on the display.  Check the LCD datasheet.  Verify resolution is at least 320~$\times$~240.
+
+\paragraph{}
+Plug the system into a PC via the data port.  Verify the PC sees the device and data transfers.
+
+\subsection{Functional Requirements}
+
+\subsubsection{Sound Capture Module}
+
+\paragraph{}
+Inspect the mic array.  Verify three mics are arranged in a triangle.  Play test tones at 20~Hz and 20~kHz with a calibrated speaker.  Record and verify both frequencies show up in the data.
+
+\paragraph{}
+Measure SNR on each channel using a 1~kHz tone at 94~dB SPL.  Verify all channels hit at least 60~dB.
+
+\subsubsection{Signal Conditioning Module}
+
+\paragraph{}
+Feed a known signal into the preamp.  Verify the output level is in the ADC's input range.
+
+\paragraph{}
+Record a test signal and check the file properties.  Verify sample rate is at least 44.1~kHz at 16-bit or better.  Clap near the array.  Check the recorded arrival times on all three channels.  Verify the offsets match the known mic spacing, confirming the channels are in sync.
+
+\subsubsection{Processing Module}
+
+\paragraph{}
+Place a sound source at a known position 2~m away.  Run the system and verify the estimated direction is within $\pm 5^{\circ}$ of actual.  Repeat at 5 different angles.
+
+\paragraph{}
+Put two sound sources at different directions.  Steer toward one and verify the other is at least 15~dB quieter in the output.
+
+\paragraph{}
+Watch the spectrogram for 10 seconds.  Count the frame updates.  Verify at least 10 frames per second.
+
+\subsubsection{Storage Module}
+
+\paragraph{}
+Check the storage chip datasheet.  Verify at least 1~GB capacity.
+
+\paragraph{}
+Record audio and export.  Open the WAV and CSV files on a PC and verify they contain valid data.
+
+\subsubsection{Display Module}
+
+\paragraph{}
+Run the system with a sound source at a known direction.  Verify the display shows a spectrogram with a directional indicator and a 3D arrow that matches the actual direction.  Move the source.  Verify the arrow updates to follow it.
+
+\paragraph{}
+Turn the steering control and time how long until the display updates.  Verify latency is under 100~ms.
+
+\subsection{Non-Functional Requirements}
+
+\subsubsection{Electrical}
+
+\paragraph{}
+Inspect the system.  Verify it runs on a rechargeable battery.  Charge fully and run continuously.  Time it until it dies.  Verify at least 2 hours.
+
+\paragraph{}
+Inspect for a USB-C port.  Plug in a charger and verify it charges.
+
+\subsubsection{Physical}
+
+\paragraph{}
+Inspect the system.  Verify all electronics are enclosed.  Drop the controller and probe each from 1.2~m onto concrete.  Power on after each drop and verify everything still works.
+
+\paragraph{}
+Push on the boom sideways with a force gauge at 20~N.  Let go and verify it didn't bend.
+
+\subsubsection{Environmental}
+
+\paragraph{}
+Run the system at 0$^{\circ}$C and 45$^{\circ}$C.  Verify it works at both extremes.
+
+\paragraph{}
+Run IP54 testing per IEC 60529 (dust and splash).  Verify the system still works after.
+
+\subsubsection{Economic}
+
+\paragraph{}
+Add up the BOM.  Verify total component cost is \$500 or less.
+
+\subsection{Other Requirements}
+
+\subsubsection{Safety}
+
+\paragraph{}
+Inspect the system.  Verify no conductors are exposed during normal use.  Measure sound output at the user's ear with a sound level meter.  Verify it doesn't exceed 85~dBA.
+
+\paragraph{}
+Check the battery protection circuit datasheet.  Verify it has over-current and over-temperature protection.
+
+\subsection{Verification Summary}
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|c|c|C{6cm}|c|c|}
+\small
+\begin{tabular}{|c|c|C{4cm}|c|c|}
 \hline
-\textbf{Paragraph Number} & \textbf{Test Type}& 
+\textbf{Req.} & \textbf{Test Type}&
 \textbf{Tester's Name} & \textbf{Pass/Fail} & \textbf{Date} \\
 \hline
- & & & & \\
+4.2.1.1 & Inspection & & & \\
 \hline
- & & & & \\
+4.2.1.2 & Inspection & & & \\
 \hline
- & & & & \\
+4.2.1.3 & Inspection & & & \\
 \hline
- & & & & \\
+4.2.2.1 & Demonstration & & & \\
 \hline
- & & & & \\
+4.2.2.2 & Demonstration & & & \\
 \hline
- & & & & \\
+4.3.1.1 & Direct Test & & & \\
 \hline
- & & & & \\
+4.3.1.2 & Direct Test & & & \\
 \hline
- & & & & \\
+4.3.2.1 & Direct Test & & & \\
 \hline
- & & & & \\
+4.3.2.2 & Direct Test & & & \\
 \hline
- & & & & \\
+4.3.3.1 & Direct Test & & & \\
+\hline
+4.3.3.2 & Direct Test & & & \\
+\hline
+4.3.3.3 & Direct Test & & & \\
+\hline
+4.3.4.1 & Analysis & & & \\
+\hline
+4.3.4.2 & Demonstration & & & \\
+\hline
+4.3.5.1 & Demonstration & & & \\
+\hline
+4.3.5.2 & Direct Test & & & \\
+\hline
+4.4.1.1 & Direct Test & & & \\
+\hline
+4.4.1.2 & Inspection & & & \\
+\hline
+4.4.2.1 & Direct Test & & & \\
+\hline
+4.4.2.2 & Direct Test & & & \\
+\hline
+4.4.3.1 & Direct Test & & & \\
+\hline
+4.4.3.2 & Direct Test & & & \\
+\hline
+4.4.4.1 & Analysis & & & \\
+\hline
+4.5.1.1 & Inspection & & & \\
+\hline
+4.5.1.2 & Analysis & & & \\
 \hline
 \end{tabular}
 \end{table}
-

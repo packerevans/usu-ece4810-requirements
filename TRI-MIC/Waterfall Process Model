@@ -1,0 +1,32 @@
+The Development plan:
+
+
+(1) Process Model
+The Tri-mic 
+  A microphone that can record and do direction finding in 3D dimensions. 
+allowing for data review and  analyses during and after capture.
+The overall use of this device would be for pinpointing problems using sound or later export for audio analysis
+
+(2)Requirements: Stakeholder & Engineering. (What Must it do)
+It can accurately process and visually display sound waves in an easy to understand and measurable way.
+Accurately point to the correctly identified direction.
+Something although not required but nice to have would be the technology is durable and easy to work with. If it was dropped or exposed to little moisture
+ It can continue to function as needed.
+
+(3)Testing Plan. (How will I Demonstrate that it works?)
+Place Tri-mic in a room and see if it can accurately pinpoint a single conversation around others in the same room.
+It’s able to focus on one voice and mute other noise or impertinent voices.
+It can distinguish direction from claps.
+
+(4)Design Plan.(The how’s)
+Research industry standard components 
+Research Wave computation (MUSIC Algorithm)
+Design CAD, PCB and materials, 
+Purchase and design test material for variable mic distances and effectivity with using alternate sound calculation pipelines,
+Once decided on a working solution build with improvements in mind  
+purchase then test. 
+
+(5)Design Reviews
+- Approve design with engineers 
+- Run cost estimations 
+- Do market research

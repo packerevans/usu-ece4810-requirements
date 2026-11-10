@@ -1,1 +1,62 @@
-\section{STAKEHOLDER REQUIREMENTS} 
+\section{STAKEHOLDER REQUIREMENTS}
+
+The stakeholders for the Tri-Mic are:
+
+\begin{enumerate}
+	\item End users (field technicians and hardware enthusiasts)
+	\item Environmental and durability concerns
+	\item Data and export needs
+	\item Manufacturing and engineering team
+\end{enumerate}
+
+\subsection{Stakeholder User Stories}
+
+\begin{itemize}
+	\item \textbf{The end user operates the Tri-Mic in the field.  The device:}
+	\begin{enumerate}
+		\item Must pinpoint specific sounds in 3D and isolate them from background noise.\\ [.5cm] \underline{User Story}\\
+		I work around loud equipment and need to figure out which direction a problem sound is coming from.  Right now I just use my ears and walk around until I think I found it.  The mic should tell me the direction so I'm not guessing.
+		\bigskip
+
+		\item Must show a spectrogram on the device without needing a laptop.\\ [.5cm] \underline{User Story}\\
+		I don't want to carry a laptop out to every job.  If I can see the frequency data right on the device I can make decisions on site and keep working.
+		\bigskip
+
+		\item Must let the user steer the directional focus and see the spectrogram change in real time.\\ [.5cm] \underline{User Story}\\
+		I want a knob or joystick that I can move around and watch the display update as I sweep different directions.  Something physical makes the most sense---I might have gloves on or be in a tight spot where a touchscreen isn't going to work.
+		\bigskip
+
+		\item Must be small enough to fit into tight spaces.\\ [.5cm] \underline{User Story}\\
+		Half the places I need to check are behind panels or inside enclosures.  The mic needs to get in there without me having to shove my head in.
+		\bigskip
+	\end{enumerate}
+
+	\item \textbf{The device must handle real-world field conditions:}
+	\begin{enumerate}
+		\item Must be tough enough to handle drops and field use.\\ [.5cm] \underline{User Story}\\
+		Stuff gets dropped.  If this breaks from falling off a ladder it's not going to work for us.
+		\bigskip
+
+		\item Must still work in damp conditions.\\ [.5cm] \underline{User Story}\\
+		I work in crawl spaces, mechanical rooms, and sometimes outside.  A little moisture or humidity shouldn't kill it.
+		\bigskip
+	\end{enumerate}
+
+	\item \textbf{Captured data needs to be useful after the fact:}
+	\begin{enumerate}
+		\item Must be able to export audio and directional data to a PC.\\ [.5cm] \underline{User Story}\\
+		The on-device display is fine for field work but for real analysis we need to pull the data off and run it through our own tools on a computer.  We want WAV files and TDOA data we can actually work with.
+		\bigskip
+	\end{enumerate}
+
+	\item \textbf{Manufacturing and engineering cares about cost and flexibility:}
+	\begin{enumerate}
+		\item Must use standard off-the-shelf components.\\ [.5cm] \underline{User Story}\\
+		We don't want exotic parts with long lead times.  Standard mics, standard PCB components, standard connectors.  The MUSIC algorithm is well-established so we're not reinventing the wheel on the computation side either.
+		\bigskip
+
+		\item Must support adjustable mic spacing and swappable DSP pipelines during prototyping.\\ [.5cm] \underline{User Story}\\
+		We need to try different array configurations to see what gives the best direction-finding accuracy.  MUSIC is our starting algorithm but we might try other approaches.  The architecture should let us change both the mic geometry and the processing without redesigning the hardware.
+		\bigskip
+	\end{enumerate}
+\end{itemize}
