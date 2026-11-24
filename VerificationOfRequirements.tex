@@ -22,163 +22,185 @@ Possible verification methods include:
 \subsubsection{Physical}
 
 \paragraph{}
-Measure the probe with calipers.  Verify it fits within 5~cm $\times$ 5~cm $\times$ 5~cm.
+(Verifies 4.2.1.1) Measure the boom length with a tape measure or ruler.  Verify it is between 30~cm and 60~cm.  Disconnect and reconnect the probe at the detachable connector 10 times.  Verify the mechanical and electrical connection holds and the system still operates normally.
 
 \paragraph{}
-Measure the boom length.  Verify it's between 30~cm and 60~cm.  Disconnect and reconnect the probe 10 times.  Verify the connection holds and the system still works.
-
-\paragraph{}
-Measure the handheld controller.  Verify it fits within 18~cm $\times$ 10~cm $\times$ 5~cm.  Weigh the full system on a scale.  Verify total is 1.5~kg or less.
+(Verifies 4.2.1.2) Weigh the fully assembled system (probe, boom, and handheld controller with battery installed) on a calibrated scale.  Verify total weight is 1.5~kg or less.
 
 \subsubsection{Functional}
 
 \paragraph{}
-Turn the steering control.  Verify the beamforming direction changes on the display.  Check the LCD datasheet.  Verify resolution is at least 320~$\times$~240.
-
-\paragraph{}
-Plug the system into a PC via the data port.  Verify the PC sees the device and data transfers.
+(Verifies 4.2.2.1) Connect the system to a PC via the data port.  Verify the PC enumerates the device and transfers recorded data files without errors.
 
 \subsection{Functional Requirements}
 
 \subsubsection{Sound Capture Module}
 
 \paragraph{}
-Inspect the mic array.  Verify three mics are arranged in a triangle.
+(Verifies 4.3.1.1) Inspect the microphone array to verify three microphones are arranged in a triangular geometry.  Play calibrated test tones at 20~Hz and 20~kHz using a reference speaker, record the output, and verify both frequencies are captured and visible on the spectrogram.
 
 \paragraph{}
-Play test tone at 20~Hz with a calibrated speaker.  Record and verify the frequency shows up on the screen.
+(Verifies 4.3.1.2) Measure the SNR on each of the three microphone channels using a 1~kHz, 94~dB SPL reference tone checked with an IEC~61672-1 sound level meter.  Verify all three channels achieve at least 60~dB SNR.
 
 \paragraph{}
-Play test tone at 20~kHz with a calibrated speaker.  Record and verify the frequency shows up on the screen.
+(Verifies 4.3.1.3) Inspect the prototype microphone array mount to verify spacing can be adjusted between at least two distinct configurations.  Verify that in the locked/production configuration the microphone positions remain fixed and rigid with no measurable play during handling.
 
 \paragraph{}
-Measure SNR on each channel using a 1~kHz tone at 94~dB SPL.  Verify all channels hit at least 60~dB.
+(Verifies 4.3.1.4) Measure the probe exterior with calipers.  Verify the probe fits within 5~cm $\times$ 5~cm $\times$ 5~cm and houses the microphone array.
 
 \subsubsection{Signal Conditioning Module}
 
 \paragraph{}
-Feed a known signal into the preamp.  Verify the output level is in the ADC's input range.
+(Verifies 4.3.2.1) Inject a known test signal into the preamp input and measure the conditioned output with an oscilloscope.  Verify the output voltage stays within the ADC's specified input range without clipping.
 
 \paragraph{}
-Record a test signal and check the file properties.  Verify sample rate is at least 44.1~kHz at 16-bit or better.  Clap near the array.  Check the recorded arrival times on all three channels.  Verify the offsets match the known mic spacing, confirming the channels are in sync.
+(Verifies 4.3.2.2) Record a test signal and inspect the captured file properties to verify a sample rate of at least 44.1~kHz and resolution of at least 16 bits.  Generate an impulsive sound (clap) near the array and compare arrival times across all three channels to verify simultaneous sampling consistent with the known mic spacing.
+
+\paragraph{}
+(Verifies 4.3.2.3) Visually inspect the physical assembly to verify the signal conditioning circuitry is housed inside the probe or at the probe end of the boom.
 
 \subsubsection{Processing Module}
 
 \paragraph{}
-Place a sound source at a known position 2~m away.  Run the system and verify the estimated direction is within $\pm 5^{\circ}$ of actual.  Repeat at 5 different angles.
+(Verifies 4.3.3.1) Place a sound source at a known position at least 1~m away (e.g., 2~m).  Run the MUSIC direction-of-arrival algorithm and verify the estimated horizontal and vertical angles are within $\pm 5^{\circ}$ of the true angle.  Repeat across at least 5 distinct angles.
 
 \paragraph{}
-Put two sound sources at different directions.  Steer toward one and verify the other is at least 15~dB quieter in the output.
+(Verifies 4.3.3.2) Place two sound sources at distinct angles.  Steer the beamformer toward the target source and measure the level of the off-axis source in the beamformed output.  Verify at least 15~dB of directional rejection.
 
 \paragraph{}
-Watch the spectrogram for 10 seconds.  Count the frame updates.  Verify at least 10 frames per second.
+(Verifies 4.3.3.3) Observe the 2D time-by-frequency spectrogram generated from the beamformed output over a 10-second interval and count frame updates (or log frame timestamps).  Verify the update rate is at least 10 updates per second.
+
+\paragraph{}
+(Verifies 4.3.3.4) Load an alternate DSP processing pipeline onto the processing module without modifying the hardware.  Verify the system compiles/loads and executes the alternate pipeline.
+
+\paragraph{}
+(Verifies 4.3.3.5) Inspect the handheld controller to verify it houses the processing module, and measure its outer dimensions with calipers.  Verify the controller fits within 18~cm $\times$ 10~cm $\times$ 5~cm.
+
+\paragraph{}
+(Verifies 4.3.3.6) Inspect the handheld controller for a physical steering control (knob, roller, or joystick).  Operate the control and verify it adjusts the directional focus of the beamformer.
 
 \subsubsection{Storage Module}
 
 \paragraph{}
-Check the storage chip datasheet.  Verify at least 1~GB capacity.
+(Verifies 4.3.4.1) Review the onboard non-volatile memory datasheet and verify at least 1~GB capacity is installed in the handheld controller.
 
 \paragraph{}
-Record audio and export.  Open the WAV and CSV files on a PC and verify they contain valid data.
+(Verifies 4.3.4.2) Record an audio session and export the files through the data port to a PC.  Open the exported WAV audio files and CSV directional data files on the PC and verify both are valid and readable.
 
 \subsubsection{Display Module}
 
 \paragraph{}
-Run the system with a sound source at a known direction.  Verify the display shows a spectrogram with a directional indicator and a 3D arrow that matches the actual direction.  Move the source.  Verify the arrow updates to follow it.
+(Verifies 4.3.5.1) Review the LCD datasheet and inspect the handheld controller.  Verify the display is an LCD with a resolution of at least 320~$\times$~240 pixels.
 
 \paragraph{}
-Turn the steering control and time how long until the display updates.  Verify latency is under 100~ms.
+(Verifies 4.3.5.2) Operate the system with a sound source at a known location.  Verify the display renders a spectrogram along with a directional indicator and a 3D arrow pointing toward the dominant sound source.  Move the source and verify the arrow updates to track it.
+
+\paragraph{}
+(Verifies 4.3.5.3) Actuate the steering control while measuring elapsed time (via high-speed video or GPIO/frame timestamping) until the display reflects the new direction.  Verify latency is 100~ms or less.
 
 \subsection{Non-Functional Requirements}
 
-\subsubsection{Electrical}
+\subsubsection{Power}
 
 \paragraph{}
-Inspect the system.  Verify it runs on a rechargeable battery.  Charge fully and run continuously.  Time it until it dies.  Verify at least 2 hours.
+(Verifies 4.4.1.1) Inspect the handheld controller to verify it is powered by a rechargeable battery.  Charge the battery to 100\% and operate the system continuously until shutdown.  Verify continuous runtime is at least 2 hours.
 
 \paragraph{}
-Inspect for a USB-C port.  Plug in a charger and verify it charges.
+(Verifies 4.4.1.2) Inspect the handheld controller for a USB-C charging port.  Connect a standard USB-C charger and verify the battery charges.
+
+\paragraph{}
+(Verifies 4.4.1.3) Review the battery pack and protection circuit datasheets.  Verify both over-current and over-temperature protection are included.
 
 \subsubsection{Physical}
 
 \paragraph{}
-Inspect the system.  Verify all electronics are enclosed.  Drop the controller and probe each from 1.2~m onto concrete.  Power on after each drop and verify everything still works.
+(Verifies 4.4.2.1) Inspect the system to verify all electronics are housed in protective enclosures.  Drop the handheld controller and probe each from 1.2~m onto concrete (MIL-STD-810H, Method~516.8, Procedure~IV).  Power on the system after each drop and verify full operation.
 
 \paragraph{}
-Push on the boom sideways with a force gauge at 20~N.  Let go and verify it didn't bend.
+(Verifies 4.4.2.2) Apply a 20~N lateral force to the boom using a calibrated force gauge.  Release the load and inspect/measure the boom to verify no permanent bending occurred.
+
+\paragraph{}
+(Verifies 4.4.2.3) Visually inspect the assembled system during normal use.  Verify no live or exposed conductors are accessible.
 
 \subsubsection{Environmental}
 
 \paragraph{}
-Run the system at 0$^{\circ}$C and 45$^{\circ}$C.  Verify it works at both extremes.
+(Verifies 4.4.3.1) Operate the system inside a temperature chamber at 0$^{\circ}$C and at 45$^{\circ}$C per MIL-STD-810H, Methods~502.7 and 501.7.  Verify normal operation at both temperature extremes.
 
 \paragraph{}
-Run IP54 testing per IEC 60529 (dust and splash).  Verify the system still works after.
+(Verifies 4.4.3.2) Perform IP54 dust and splash ingress testing per IEC~60529.  Verify the system continues to operate normally after testing.
 
 \subsubsection{Economic}
 
 \paragraph{}
-Add up the BOM.  Verify total component cost is \$500 or less.
-
-\subsection{Other Requirements}
-
-\subsubsection{Safety}
-
-\paragraph{}
-Inspect the system.  Verify no conductors are exposed during normal use.  Measure sound output at the user's ear with a sound level meter.  Verify it doesn't exceed 85~dBA.
-
-\paragraph{}
-Check the battery protection circuit datasheet.  Verify it has over-current and over-temperature protection.
+(Verifies 4.4.4.1) Review the Bill of Materials (BOM) and vendor listings.  Verify all components are standard off-the-shelf parts and total prototype component cost is \$500 or less.
 
 \subsection{Verification Summary}
 
-\begin{table}[h]
-\centering
+\begin{center}
 \small
-\begin{tabular}{|c|c|C{4cm}|c|c|}
+\begin{longtable}{|c|c|C{4cm}|c|c|}
 \hline
-\textbf{Req.} & \textbf{Test Type}&
-\textbf{Tester's Name} & \textbf{Pass/Fail} & \textbf{Date} \\
+\textbf{Req.} & \textbf{Test Type} & \textbf{Tester's Name} & \textbf{Pass/Fail} & \textbf{Date} \\
 \hline
-4.2.1.1 & Inspection & & & \\
+\endfirsthead
+\hline
+\textbf{Req.} & \textbf{Test Type} & \textbf{Tester's Name} & \textbf{Pass/Fail} & \textbf{Date} \\
+\hline
+\endhead
+4.2.1.1 & Inspection / Demo & & & \\
 \hline
 4.2.1.2 & Inspection & & & \\
 \hline
-4.2.1.3 & Inspection & & & \\
-\hline
 4.2.2.1 & Demonstration & & & \\
 \hline
-4.2.2.2 & Demonstration & & & \\
-\hline
-4.3.1.1 & Direct Test & & & \\
+4.3.1.1 & Inspection / Direct Test & & & \\
 \hline
 4.3.1.2 & Direct Test & & & \\
+\hline
+4.3.1.3 & Inspection & & & \\
+\hline
+4.3.1.4 & Inspection & & & \\
 \hline
 4.3.2.1 & Direct Test & & & \\
 \hline
 4.3.2.2 & Direct Test & & & \\
 \hline
+4.3.2.3 & Inspection & & & \\
+\hline
 4.3.3.1 & Direct Test & & & \\
 \hline
 4.3.3.2 & Direct Test & & & \\
 \hline
-4.3.3.3 & Direct Test & & & \\
+4.3.3.3 & Demonstration & & & \\
+\hline
+4.3.3.4 & Demonstration & & & \\
+\hline
+4.3.3.5 & Inspection & & & \\
+\hline
+4.3.3.6 & Demonstration & & & \\
 \hline
 4.3.4.1 & Analysis & & & \\
 \hline
 4.3.4.2 & Demonstration & & & \\
 \hline
-4.3.5.1 & Demonstration & & & \\
+4.3.5.1 & Analysis / Inspection & & & \\
 \hline
-4.3.5.2 & Direct Test & & & \\
+4.3.5.2 & Demonstration & & & \\
+\hline
+4.3.5.3 & Direct Test & & & \\
 \hline
 4.4.1.1 & Direct Test & & & \\
 \hline
-4.4.1.2 & Inspection & & & \\
+4.4.1.2 & Inspection / Demo & & & \\
 \hline
-4.4.2.1 & Direct Test & & & \\
+4.4.1.3 & Analysis & & & \\
+\hline
+4.4.2.1 & Inspection / Direct Test & & & \\
 \hline
 4.4.2.2 & Direct Test & & & \\
+\hline
+4.4.2.3 & Inspection & & & \\
 \hline
 4.4.3.1 & Direct Test & & & \\
 \hline
@@ -186,9 +208,5 @@ Check the battery protection circuit datasheet.  Verify it has over-current and 
 \hline
 4.4.4.1 & Analysis & & & \\
 \hline
-4.5.1.1 & Inspection & & & \\
-\hline
-4.5.1.2 & Analysis & & & \\
-\hline
-\end{tabular}
-\end{table}
+\end{longtable}
+\end{center}

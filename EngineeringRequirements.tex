@@ -100,7 +100,7 @@ The total weight of the assembled system (probe, boom, and controller) shall not
 \subsubsection{Functional}
 
 \paragraph{}
-The system shall have a data port (USB or similar) for exporting data to a PC.
+The system shall have a USB~2.0 compatible data port for exporting data to a PC.
 
 \subsection{Functional Requirements}
 
@@ -110,19 +110,13 @@ The system shall have a data port (USB or similar) for exporting data to a PC.
 The system shall use three microphones arranged in a triangular array, capturing frequencies from 20~Hz to 20~kHz.
 
 \paragraph{}
-Each mic channel shall have a signal-to-noise ratio of at least 60~dB.
+Each mic channel shall have a signal-to-noise ratio of at least 60~dB using a 94~dB SPL (1~kHz) reference per IEC~61672-1.
 
 \paragraph{}
 The microphone spacing shall be fixed and rigid so calibration stays accurate.  During prototyping, the mic array shall support adjustable spacing so different configurations can be tested.
 
 \paragraph{}
 The mic array shall be housed in the probe.  The probe shall have maximum dimensions of 5~cm $\times$ 5~cm $\times$ 5~cm.
-
-\paragraph{}
-The probe shall be at least IP54 rated (dust protected, splash resistant) and shall operate from 0$^{\circ}$C to 45$^{\circ}$C.
-
-\paragraph{}
-The probe shall survive a 1.2~m drop onto concrete without breaking.
 
 \subsubsection{Signal Conditioning Module}
 
@@ -135,13 +129,10 @@ The ADC shall sample all three channels simultaneously at a minimum of 44.1~kHz 
 \paragraph{}
 The signal conditioning circuitry shall be housed in the probe or at the probe end of the boom to keep the analog signal path short.
 
-\paragraph{}
-The signal conditioning electronics shall be enclosed with no exposed conductors during normal use.
-
 \subsubsection{Processing Module}
 
 \paragraph{} \label{musicReq}
-The processing module shall run the MUSIC algorithm for direction-of-arrival estimation.  The system shall determine azimuth and elevation of a sound source within $\pm 5^{\circ}$ at distances of 1~m or more.
+The processing module shall run the MUSIC algorithm for direction-of-arrival estimation.  The system shall determine the horizontal and vertical angles of a sound source within $\pm 5^{\circ}$ at distances of 1~m or more.
 
 \paragraph{} \label{beamform}
 The processing module shall do beamforming so the user can focus on one direction and reject sound from other directions.  The system shall isolate a target sound source with at least 15~dB of directional rejection.
@@ -185,7 +176,7 @@ Latency from steering input to display update shall be no more than 100~ms.
 The system shall run on a rechargeable battery in the handheld controller that lasts at least 2 hours of continuous use.
 
 \paragraph{}
-The system shall have a USB-C charging port on the handheld controller.
+The system shall have a USB Type-C charging port on the handheld controller.
 
 \paragraph{}
 The battery shall have over-current and over-temperature protection.
@@ -193,7 +184,7 @@ The battery shall have over-current and over-temperature protection.
 \subsubsection{Physical}
 
 \paragraph{} \label{drop}
-All electronics shall be enclosed in a protective case.  The system shall survive a 1.2~m drop onto concrete without breaking.
+All electronics shall be enclosed in a protective case.  The system shall survive a 1.2~m drop onto concrete per MIL-STD-810H, Method~516.8, Procedure~IV without breaking.
 
 \paragraph{}
 The boom shall handle at least 20~N of lateral force without bending permanently.
@@ -204,10 +195,10 @@ The system shall not have exposed conductors during normal use.
 \subsubsection{Environmental}
 
 \paragraph{} \label{temp}
-The system shall operate from 0$^{\circ}$C to 45$^{\circ}$C.
+The system shall operate from 0$^{\circ}$C to 45$^{\circ}$C per MIL-STD-810H, Methods~501.7 (high temperature) and 502.7 (low temperature).
 
 \paragraph{} \label{ip}
-The system shall be at least IP54 rated (dust protected, splash resistant).
+The system shall be at least IP54 rated (dust protected, splash resistant) per IEC~60529.
 
 \subsubsection{Economic}
 
